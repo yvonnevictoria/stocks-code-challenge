@@ -32,7 +32,6 @@ class BalanceService {
      */
     static async addToBalance({ amount }) {
         store.balance = store.balance + amount;
-
         return store.balance;
     }
 
