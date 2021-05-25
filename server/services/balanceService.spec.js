@@ -48,6 +48,7 @@ test.serial('resetBalance | should set balance to 7432', async t => {
     const deductedCashBalance = await BalanceService.deductFromBalance({ amount: 70});
     t.is(deductedCashBalance, 7362);
 
-    const resetCashBalance = await BalanceService.resetBalance();
+    await BalanceService.resetBalance();
+    const resetCashBalance = await BalanceService.getBalance();
     t.is(resetCashBalance, 7432);
 });

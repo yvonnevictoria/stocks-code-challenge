@@ -6,7 +6,8 @@
  */
 
  const portfolio = {
-     GOOG: 1
+    GOOG: 1,
+    SPOT: 10
  };
 
 /**
@@ -44,7 +45,7 @@ class PortfolioService {
      * @returns {String} The updated portfolio.
      */
     static async addToPortfolio({ stockSymbol, amount }) {
-        const existingStocks = portfolio[stockSymbol] ? portfolio[stockSymbol].amount : 0;
+        const existingStocks = portfolio[stockSymbol] ? portfolio[stockSymbol] : 0;
 
         portfolio[stockSymbol] = amount + existingStocks;
         return portfolio;
@@ -69,6 +70,18 @@ class PortfolioService {
         ? delete portfolio[stockSymbol]
         : portfolio[stockSymbol] = existingStocks - removedStocks
 
+        return portfolio;
+    }
+
+    /**
+     * FOR TESTING PURPOSES ONLY (See documentation for explanation)
+     * Sets portfolio manually
+     *
+     * @returns {Object} portfolio - The reset portfolio.
+     */
+    static async resetPortfolio() {
+        portfolio['GOOG'] = 1;
+        portfolio['SPOT'] = 10;
         return portfolio;
     }
 }

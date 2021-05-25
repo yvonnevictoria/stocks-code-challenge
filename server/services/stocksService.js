@@ -72,7 +72,7 @@ class StocksService {
             console.log(error);
 
             // API uses strings instead of codes to return errors.
-            // Think about this and come back tomorrow
+            // TODO YVO: Think about this and come back tomorrow
             throw new Error();
         }
     }
