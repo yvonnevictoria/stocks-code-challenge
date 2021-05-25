@@ -66,7 +66,7 @@ class StocksService {
 
             // Use last refreshed date to find the latest stock price
             const { "Time Series (Daily)": { [dateRefreshed]: { "4. close": stockPrice } } } = response.data;
-            return stockPrice;
+            return Number(stockPrice);
 
         } catch (error) {
             console.log(error);

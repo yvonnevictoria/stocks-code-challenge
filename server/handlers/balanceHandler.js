@@ -71,5 +71,5 @@ module.exports = {
                     return h.response().code(500)
             }
         }
-    },
+    }
 };
