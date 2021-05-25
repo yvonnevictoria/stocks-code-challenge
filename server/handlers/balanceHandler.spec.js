@@ -36,7 +36,7 @@ test.serial('PATCH /add | should return updated balance', async t => {
     };
 
     const { result, statusCode } = await server.inject(request);
-    t.is(statusCode, 201);
+    t.is(statusCode, 200);
     t.is(result, 7502)
 });
 
@@ -52,7 +52,7 @@ test.serial('PATCH /deduct | should return updated balance', async t => {
     };
     const { result, statusCode } = await server.inject(request);
 
-    t.is(statusCode, 201);
+    t.is(statusCode, 200);
     t.is(result, 7362)
 });
 

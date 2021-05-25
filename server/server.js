@@ -1,6 +1,8 @@
 'use strict';
 const StocksHandler = require('./handlers/stocksHandler');
 const BalanceHandler = require('./handlers/balanceHandler');
+const TradeHandler = require('./handlers/tradeHandler');
+const PortfolioHandler = require('./handlers/portfolioHandler');
 
 const Hapi = require('@hapi/hapi');
 
@@ -35,6 +37,24 @@ const init = async () => {
         method: 'GET',
         path: '/stock-price/{stockSymbol}',
         handler: StocksHandler.getStockPrice
+    });
+
+    server.route({
+        method: 'GET',
+        path: '/portfolio',
+        handler: PortfolioHandler.getPortfolio
+    });
+
+    server.route({
+        method: 'POST',
+        path: '/buy',
+        handler: TradeHandler.purchaseStock
+    });
+
+    server.route({
+        method: 'POST',
+        path: '/sell',
+        handler: TradeHandler.sellStock
     });
 
     await server.start();

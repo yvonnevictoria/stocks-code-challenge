@@ -39,7 +39,7 @@ module.exports = {
             if (typeof amount === "string") { amount = Number(amount); }
             const updatedBalance = await BalanceService.addToBalance({ amount });
 
-            return h.response(updatedBalance).code(201)
+            return h.response(updatedBalance).code(200)
         } catch (err) {
             return h.response().code(500)
         }
@@ -62,7 +62,7 @@ module.exports = {
             if (typeof amount === "string") { amount = Number(amount); }
             const updatedBalance = await BalanceService.deductFromBalance({ amount });
 
-            return h.response(updatedBalance).code(201)
+            return h.response(updatedBalance).code(200)
         } catch (err) {
             switch (err.message) {
                 case 'INSUFFICIENT_BALANCE':

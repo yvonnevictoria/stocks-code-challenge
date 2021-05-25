@@ -58,19 +58,16 @@ class StocksService {
     static async getStockPrice({ stockSymbol }) {
         try {
             const targetUrl = url({ stockSymbol });
-            // Not destructuring data here in case unexpected structure returned
-            const response = await axios.get(targetUrl);
+            const { data } = await axios.get(targetUrl);
 
             // Destructure object to pull out date last refreshed
-            const { "Meta Data": { '3. Last Refreshed': dateRefreshed } } = response.data;
+            const { "Meta Data": { '3. Last Refreshed': dateRefreshed } } = data;
 
             // Use last refreshed date to find the latest stock price
-            const { "Time Series (Daily)": { [dateRefreshed]: { "4. close": stockPrice } } } = response.data;
+            const { "Time Series (Daily)": { [dateRefreshed]: { "4. close": stockPrice } } } = data;
             return Number(stockPrice);
 
         } catch (error) {
-            console.log(error);
-
             // API uses strings instead of codes to return errors.
             // TODO YVO: Think about this and come back tomorrow
             throw new Error();
