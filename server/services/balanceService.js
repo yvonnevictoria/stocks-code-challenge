@@ -4,8 +4,8 @@
  * @module
  */
 
- const store = {
-     balance: 7432
+ const balance = {
+     currentAmount: 7432
  };
 
 /**
@@ -20,7 +20,7 @@ class BalanceService {
      * @returns {String} The cash balance for the user.
      */
     static async getBalance() {
-        return store.balance;
+        return balance.currentAmount;
     }
 
     /**
@@ -31,8 +31,8 @@ class BalanceService {
      * @returns {String} The updated cash balance for the user.
      */
     static async addToBalance({ amount }) {
-        store.balance = store.balance + amount;
-        return store.balance;
+        balance.currentAmount = balance.currentAmount + amount;
+        return balance.currentAmount;
     }
 
     /**
@@ -44,12 +44,23 @@ class BalanceService {
      * @returns {String} The updated cash balance for the user.
      */
     static async deductFromBalance({ amount }) {
-        if (store.balance >= amount) {
-            store.balance = store.balance - amount;
-            return store.balance;
+        if (balance.currentAmount >= amount) {
+            balance.currentAmount = balance.currentAmount - amount;
+            return balance.currentAmount;
         }
 
         throw new Error('INSUFFICIENT_BALANCE');
+    }
+
+    /**
+     * FOR TESTING PURPOSES ONLY (See documentation for explanation)
+     * Sets balance manually
+     *
+     * @returns {String} The updated cash balance for the user.
+     */
+    static async resetBalance() {
+        balance.currentAmount = 7432;
+        return balance.currentAmount;
     }
 }
 
