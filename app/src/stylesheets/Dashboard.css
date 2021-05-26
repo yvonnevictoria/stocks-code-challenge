@@ -1,0 +1,35 @@
+.dashboard {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0px;
+}
+
+button {
+    box-sizing: border-box;
+    border-radius: 128px;
+    min-width: 134px;
+    height: 40px;
+    border: 3px solid #036497;
+    font-weight: bold;
+}
+
+.primary {
+    color: #fff;
+    background: #036497;
+}
+
+.primary:hover {
+    background: #0375b0;
+    border: 3px solid #0375b0;
+    cursor: pointer;
+}
+
+.secondary {
+    background: #FFFFFF;
+}
+
+.secondary:hover {
+    background: #F2F2F2;
+    cursor: pointer;
+}

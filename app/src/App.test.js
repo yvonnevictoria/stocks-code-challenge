@@ -1,8 +1,28 @@
-import { render, screen } from '@testing-library/react';
 import App from './App';
+import { mount } from 'enzyme';
+import { Provider } from 'react-redux';
+import configureStore from 'redux-mock-store';
 
-test('renders learn react link', () => {
-  render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+test('renders react app', () => {
+    const mockStore = configureStore([]);
+    const store = mockStore({
+        balance: {
+            balance: 0,
+            isLoading: false,
+            isError: false
+        },
+        portfolio: {
+            portfolio: {},
+            isLoading: false,
+            isError: false
+        }
+    });
+
+    const wrapper = mount(
+        <Provider store={store}>
+            <App />
+        </Provider>
+    );
+
+    expect(wrapper.find('Dashboard').length).toBe(1);
 });

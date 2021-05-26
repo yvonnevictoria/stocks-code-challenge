@@ -1,0 +1,44 @@
+.portfolio-container {
+    margin: 24px;
+    border: 1px solid #E2E1DF;
+    box-sizing: border-box;
+    box-shadow: 0px 2px 8px rgba(113, 110, 106, 0.2);
+    border-radius: 4px;
+    padding: 24px;
+}
+
+.flex-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.buy-stocks {
+    font-weight: bold;
+
+}
+
+.buy-stocks:hover {
+    background: grey;
+}
+
+.portfolio-table {
+    padding: 32px 0;
+}
+
+th {
+    width: 214px;
+    height: 52px;
+    background: #F5F5F4;
+}
+
+th:first {
+    width: 250px;
+}
+
+td {
+    width: 214px;
+    height: 52px;
+    box-shadow: 0px 1px 0px #E2E1DF;
+    font-weight: 100;
+}

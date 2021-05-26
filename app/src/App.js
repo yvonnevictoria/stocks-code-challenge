@@ -1,10 +1,10 @@
 import React from 'react';
-import { Stocks } from "./components/Stocks"
+import { Dashboard } from "./components/Dashboard"
 import './App.css';
 
 const App = () => (
     <div className="App">
-      <Stocks />
+      <Dashboard />
     </div>
 );
 
