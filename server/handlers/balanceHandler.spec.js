@@ -68,4 +68,5 @@ test.serial('PATCH /deduct | should return 400 error if insufficient funds', asy
     };
     const { result, statusCode } = await server.inject(request);
     t.is(statusCode, 400);
+    t.is(result, 'Insufficient funds');
 });

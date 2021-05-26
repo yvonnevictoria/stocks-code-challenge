@@ -60,6 +60,7 @@ module.exports = {
                     return h.response('Insufficient stocks').code(406)
                 default:
                     return h.response().code(500)
-            }        }
+            }
+        }
     },
 };

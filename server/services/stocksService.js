@@ -17,28 +17,7 @@ const axios = require('axios')
   * @param {String} obj.stockSymbol - The specified stock symbol.
   */
 const url = ({ stockSymbol }) => {
-    return `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=${stockSymbol}&apikey=${API_KEY}`;
-};
-
-/**
- * Handles response errors.
- *
- * @private
- * @param {Object} obj - The arguments object.
- * @param {Response} obj.response - The response object returned by a fetch request.
- */
-const handleHttpErrors = ({ err }) => {
-    switch (err.code) {
-        case 401:
-            throw new Error('UNAUTHORIZED');
-        case 403:
-            throw new Error('FORBIDDEN');
-        case 404:
-            throw new Error('NOT_FOUND');
-        case 500:
-        default:
-            throw new Error('UNKNOWN');
-    }
+    return `https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=${stockSymbol}&apikey=${API_KEY}`;
 };
 
 /**
@@ -60,17 +39,20 @@ class StocksService {
             const targetUrl = url({ stockSymbol });
             const { data } = await axios.get(targetUrl);
 
-            // Destructure object to pull out date last refreshed
-            const { "Meta Data": { '3. Last Refreshed': dateRefreshed } } = data;
+            const { "Global Quote": { "05. price": stockPrice } } = data;
 
-            // Use last refreshed date to find the latest stock price
-            const { "Time Series (Daily)": { [dateRefreshed]: { "4. close": stockPrice } } } = data;
+            if (stockPrice == null) {
+                throw new Error('NOT_FOUND');
+            }
+
             return Number(stockPrice);
-
         } catch (error) {
-            // API uses strings instead of codes to return errors.
-            // TODO YVO: Think about this and come back tomorrow
-            throw new Error();
+            switch (err.message) {
+                case 'NOT_FOUND':
+                    throw new Error('NOT_FOUND');
+                default:
+                    throw new Error('UNKNOWN');
+            }
         }
     }
 }

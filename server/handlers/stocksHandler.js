@@ -15,8 +15,18 @@ module.exports = {
      * @returns {Response} Response with the stock price.
      */
     getStockPrice: async (request, h) => {
-        // TODO YVO: Add error handling
-        const { stockSymbol } = request.params;
-        return StocksService.getStockPrice({ stockSymbol });
+        try {
+            const { stockSymbol } = request.params;
+            const stockPrice = await StocksService.getStockPrice({ stockSymbol });
+
+            return h.response(stockPrice).code(200)
+        } catch (err) {
+            switch (err.message) {
+                case 'NOT_FOUND':
+                    return h.response('Stock symbol not found').code(404)
+                default:
+                    return h.response().code(500)
+            }
+        }
     }
 };
