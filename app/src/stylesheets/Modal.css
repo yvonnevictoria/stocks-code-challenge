@@ -5,6 +5,8 @@
     width: 100%;
     height: 100%;
     background: rgba(0, 0, 0, 0.6);
+    text-align: left;
+    color: #000;
 }
 
 .modal-container {
@@ -88,4 +90,8 @@
 
 .cancel-button {
     margin-right: 8px;
+}
+
+.error-message {
+    color: red;
 }

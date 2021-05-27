@@ -35,25 +35,16 @@ class StocksService {
      * @returns {String} The stock price for the supplied stock symbol.
      */
     static async getStockPrice({ stockSymbol }) {
-        try {
-            const targetUrl = url({ stockSymbol });
-            const { data } = await axios.get(targetUrl);
+        const targetUrl = url({ stockSymbol });
+        const { data } = await axios.get(targetUrl);
 
-            const { "Global Quote": { "05. price": stockPrice } } = data;
+        const { "Global Quote": { "05. price": stockPrice } } = data;
 
-            if (stockPrice == null) {
-                throw new Error('NOT_FOUND');
-            }
-
-            return Number(stockPrice);
-        } catch (error) {
-            switch (err.message) {
-                case 'NOT_FOUND':
-                    throw new Error('NOT_FOUND');
-                default:
-                    throw new Error('UNKNOWN');
-            }
+        if (stockPrice == null) {
+            throw new Error('NOT_FOUND');
         }
+
+        return Number(stockPrice);
     }
 }
 

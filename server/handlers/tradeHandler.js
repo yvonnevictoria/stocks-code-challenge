@@ -18,7 +18,7 @@ module.exports = {
      */
     purchaseStock: async (request, h) => {
         try {
-            let { stock: stockSymbol, amount } = request.payload;
+            let { stockSymbol, amount } = request.payload;
 
             // This is not ideal. Ususally I'd use Joi to validate param
             // types but due to time constraints a manual check will have to do.
@@ -29,7 +29,7 @@ module.exports = {
         } catch (err) {
             switch (err.message) {
                 case 'INSUFFICIENT_BALANCE':
-                    return h.response('Insufficient balance').code(402)
+                    return h.response('Insufficient balance').code(409)
                 default:
                     return h.response().code(500)
             }
@@ -46,7 +46,7 @@ module.exports = {
      */
     sellStock: async (request, h) => {
         try {
-            let { stock: stockSymbol, amount: amountToSell } = request.payload;
+            let { stockSymbol, amount: amountToSell } = request.payload;
 
             // This is not ideal. Ususally I'd use Joi to validate param
             // types but due to time constraints a manual check will have to do.
@@ -55,9 +55,11 @@ module.exports = {
 
             return h.response(updatedItems).code(200)
         } catch (err) {
+            console.log(err);
+
             switch (err.message) {
                 case 'INSUFFICIENT_BALANCE':
-                    return h.response('Insufficient stocks').code(406)
+                    return h.response('Insufficient stocks').code(409)
                 default:
                     return h.response().code(500)
             }

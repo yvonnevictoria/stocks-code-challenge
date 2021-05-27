@@ -16,11 +16,7 @@ module.exports = {
      * @returns {Response} Response with the cash balance.
      */
     getBalance: async (request, h) => {
-        try {
-            return await BalanceService.getBalance();
-        } catch (err) {
-            return h.response().code(500)
-        }
+        return await BalanceService.getBalance();
     },
 
     /**
@@ -32,17 +28,14 @@ module.exports = {
      * @returns {Response} Response with the updated cash balance.
      */
     addToBalance: async (request, h) => {
-        try {
-            let { amount } = request.payload;
+        let { amount } = request.payload;
 
-            // TODO YVO: This is not ideal. Update before submitting.
-            if (typeof amount === "string") { amount = Number(amount); }
-            const updatedBalance = await BalanceService.addToBalance({ amount });
+        // This is not ideal.  Ususally I'd use Joi to validate param
+        // types but due to time constraints a manual check will have to do.
+        if (typeof amount === "string") { amount = Number(amount); }
+        const updatedBalance = await BalanceService.addToBalance({ amount });
 
-            return h.response(updatedBalance).code(200)
-        } catch (err) {
-            return h.response().code(500)
-        }
+        return h.response(updatedBalance).code(200)
     },
 
     /**
@@ -58,15 +51,15 @@ module.exports = {
         try {
             let { amount } = request.payload;
 
-            // TODO YVO: This is not ideal. Update before submitting.
+            // This is not ideal.  Ususally I'd use Joi to validate param
+            // types but due to time constraints a manual check will have to do.
             if (typeof amount === "string") { amount = Number(amount); }
             const updatedBalance = await BalanceService.deductFromBalance({ amount });
-
             return h.response(updatedBalance).code(200)
         } catch (err) {
             switch (err.message) {
                 case 'INSUFFICIENT_BALANCE':
-                    return h.response('Insufficient funds').code(400)
+                    return h.response('Insufficient funds').code(409)
                 default:
                     return h.response().code(500)
             }

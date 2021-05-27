@@ -14,6 +14,20 @@ button {
     font-weight: bold;
 }
 
+button:disabled {
+    background: #F2F2F2;
+    border: 3px solid #F2F2F2;
+    color: #000;
+    cursor: not-allowed;
+}
+
+button:disabled:hover {
+    background: #F2F2F2;
+    color: #000;
+    border: 3px solid #F2F2F2;
+    cursor: not-allowed;
+}
+
 .primary {
     color: #fff;
     background: #036497;

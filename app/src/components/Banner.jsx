@@ -1,10 +1,15 @@
 import React, { useEffect, useState } from 'react';
+import { AddCashModal } from './AddCashModal';
+import { DeductCashModal } from './DeductCashModal';
+
 import '../stylesheets/Banner.css';
 
-const Banner = ({ getBalance, balance, isLoading, isError, setModalOpen }) => {
+const Banner = ({ getBalance, balance, isLoading, isError, addToBalance, deductFromBalance }) => {
+    const [addCashModalOpen, setAddCashModalOpen] = useState(false);
+    const [deductCashModalOpen, setDeductCashModalOpen] = useState(false);
+
     useEffect(() => {
-        // TODO YVO: If balance is 0??
-        if (!balance) { getBalance(); }
+        if (balance === null) { getBalance(); }
     }, []);
 
     if (isLoading) {
@@ -15,16 +20,41 @@ const Banner = ({ getBalance, balance, isLoading, isError, setModalOpen }) => {
         return <p>Something went wrong</p>;
     }
 
-
     return (
         <div className="banner-container">
             <div className="banner">
                 <span className="greeting">Good morning Yvonne, your cash balance is:</span>
                 <span className="cash-balance">${balance}</span>
-                <button className="edit-balance primary" onClick={() => setModalOpen(true)}>
-                    Edit cash balance
-                </button>
+                <div className="flex-box">
+                    <button className="edit-balance primary" onClick={() => setAddCashModalOpen(true)}>
+                        Add to balance
+                    </button>
+                    <button className="edit-balance primary" onClick={() => setDeductCashModalOpen(true)}>
+                        Deduct from balance
+                    </button>
+                </div>
             </div>
+
+            {
+                addCashModalOpen && (
+                    <AddCashModal
+                        modalOpen={addCashModalOpen}
+                        setModalOpen={setAddCashModalOpen}
+                        cashBalance={balance}
+                        handleConfirm={addToBalance}
+                    />
+                )
+            }
+            {
+                deductCashModalOpen && (
+                    <DeductCashModal
+                        modalOpen={deductCashModalOpen}
+                        setModalOpen={setDeductCashModalOpen}
+                        cashBalance={balance}
+                        handleConfirm={deductFromBalance}
+                    />
+                )
+            }
         </div>
     );
 };

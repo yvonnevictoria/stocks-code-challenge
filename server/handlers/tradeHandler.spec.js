@@ -41,7 +41,7 @@ test.serial('POST /buy | should add stocks to portfolio and deduct cash', async 
     });
 });
 
-test.serial('POST /buy | should return 402 error if cash balance is too low', async t => {
+test.serial('POST /buy | should return 409 error if cash balance is too low', async t => {
     sandbox.stub(TradeService, 'purchaseStock').rejects(new Error('INSUFFICIENT_BALANCE'));
 
     const request = {
@@ -55,7 +55,7 @@ test.serial('POST /buy | should return 402 error if cash balance is too low', as
 
     const { result, statusCode } = await server.inject(request);
 
-    t.is(statusCode, 402);
+    t.is(statusCode, 409);
     t.is(result, 'Insufficient balance');
 });
 
@@ -89,7 +89,7 @@ test.serial('POST /sell | should remove stocks from portfolio and add cash back 
     });
 });
 
-test.serial('POST /sell | should return 406 error if stock balance is too low', async t => {
+test.serial('POST /sell | should return 409 error if stock balance is too low', async t => {
     sandbox.stub(TradeService, 'sellStock').rejects(new Error('INSUFFICIENT_BALANCE'));
 
     const request = {
@@ -103,6 +103,6 @@ test.serial('POST /sell | should return 406 error if stock balance is too low', 
 
     const { result, statusCode } = await server.inject(request);
 
-    t.is(statusCode, 406);
+    t.is(statusCode, 409);
     t.is(result, 'Insufficient stocks');
 });

@@ -1,6 +1,8 @@
 .banner-container {
-    background: grey;
+    background: url('../images/stonks.png');
     width: 100%;
+    color: #fff;
+    background-repeat: no-repeat;
 }
 
 .banner {
@@ -27,7 +29,7 @@
 
 .edit-balance {
     width: 181px;
-
+    margin-right: 8px;
 }
 
 .edit-balance:hover {

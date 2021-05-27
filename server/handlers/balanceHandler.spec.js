@@ -56,7 +56,7 @@ test.serial('PATCH /deduct | should return updated balance', async t => {
     t.is(result, 7362)
 });
 
-test.serial('PATCH /deduct | should return 400 error if insufficient funds', async t => {
+test.serial('PATCH /deduct | should return 409 error if insufficient funds', async t => {
     sandbox.stub(BalanceService, 'deductFromBalance').rejects(new Error('INSUFFICIENT_BALANCE'));
 
     const request = {
@@ -67,6 +67,6 @@ test.serial('PATCH /deduct | should return 400 error if insufficient funds', asy
         }
     };
     const { result, statusCode } = await server.inject(request);
-    t.is(statusCode, 400);
+    t.is(statusCode, 409);
     t.is(result, 'Insufficient funds');
 });

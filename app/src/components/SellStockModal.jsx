@@ -11,14 +11,14 @@ const SellStockModal = ({ modalOpen, setModalOpen, existingStocks, handleConfirm
             handleClose={() => setModalOpen(false)}
             title={`Sell ${stockCompany} stock`}
             message="Please enter how many you would like to sell"
-            confirmText="Yes, sell stock"
+            confirmText="Yes, sell stocks"
             inputName = "sell-stock"
             inputLabel = "Amount to sell"
             inputValue = {stocksToSell}
-            amountLabel = "amount"
+            amountLabel = "Remaining amount"
             amountRemaining = {existingStocks - stocksToSell}
             onValueChange={({ target: { value } }) => setStocksToSell(value)}
-            handleConfirm = {handleConfirm}
+            handleConfirm = {() => { handleConfirm({ stockSymbol: stockCompany, amount: stocksToSell }); setModalOpen(false); }}
         />
     );
 };

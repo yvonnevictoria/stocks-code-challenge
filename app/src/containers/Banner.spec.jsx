@@ -4,6 +4,7 @@ import configureStore from 'redux-mock-store';
 import { Banner } from './Banner';
 
 describe('Banner container', () => {
+    let wrapper;
     const mockStore = configureStore([]);
     const store = mockStore({
         balance: {
@@ -13,7 +14,7 @@ describe('Banner container', () => {
         }
     });
 
-    const wrapper = shallow(<Banner store={store} />);
+    wrapper = shallow(<Banner store={store} />);
 
     afterEach(() => {
         store.clearActions();
@@ -29,15 +30,5 @@ describe('Banner container', () => {
 
     it(`should set props.balance to state.balance`, () => {
         expect(wrapper.dive().prop('balance')).toBe(987);
-    });
-
-    it('should set prop.getBanner to dispatch a balanceRetrieveRequested action', () => {
-        wrapper.prop('getBanner')();
-
-        const actions = store.getActions();
-
-        expect(actions).toEqual([{
-            type: 'BALANCE_RETRIEVE_REQUESTED',
-        }]);
     });
 });

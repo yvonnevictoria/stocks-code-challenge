@@ -16,7 +16,9 @@ const mapStateToProps = ({
 });
 
 const mapDispatchToProps = dispatch => ({
-    getPortfolio: () => dispatch(portfolioActions.portfolioRetrieveRequested())
+    getPortfolio: () => dispatch(portfolioActions.portfolioRetrieveRequested()),
+    purchaseStock: ({ stockSymbol, amount}) => dispatch(portfolioActions.stockPurchaseRequested({ stockSymbol, amount})),
+    sellStock: ({ stockSymbol, amount}) => dispatch(portfolioActions.stockSellRequested({ stockSymbol, amount}))
 });
 
 const Portfolio = connect(mapStateToProps, mapDispatchToProps)(PortfolioComponent);

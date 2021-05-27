@@ -18,7 +18,6 @@ test.afterEach.always(async () => {
 
 test.serial('getBalance | should return current cash balance', async t => {
     const cashBalance = await BalanceService.getBalance();
-
     t.is(cashBalance, 7432);
 });
 

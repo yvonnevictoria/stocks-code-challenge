@@ -1,7 +1,6 @@
 import React from 'react';
 import { shallow, mount } from 'enzyme';
 import { Banner } from './Banner';
-import { act } from 'react-dom/test-utils';
 
 describe('Banner', () => {
     let wrapper;
@@ -24,7 +23,7 @@ describe('Banner', () => {
     describe(`balance`, () => {
         it(`should call props.getBalance if balance is empty`, () => {
             const props = {
-                balance: '',
+                balance: null,
                 isLoading: false,
                 isError: false,
                 getBalance: jest.fn()
@@ -55,7 +54,7 @@ describe('Banner', () => {
 
     describe(`edit balance button`, () => {
         it(`should render edit balance button`, () => {
-            expect(wrapper.find('.edit-balance').length).toBe(1);
+            expect(wrapper.find('.edit-balance').length).toBe(2);
         });
     });
 });

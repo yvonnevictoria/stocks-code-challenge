@@ -16,7 +16,9 @@ const mapStateToProps = ({
 });
 
 const mapDispatchToProps = dispatch => ({
-    getBalance: () => dispatch(balanceActions.balanceRetrieveRequested())
+    getBalance: () => dispatch(balanceActions.balanceRetrieveRequested()),
+    addToBalance: ({ amount }) => dispatch(balanceActions.balanceAddRequested({ amount })),
+    deductFromBalance: ({ amount }) => dispatch(balanceActions.balanceDeductRequested({ amount }))
 });
 
 const Banner = connect(mapStateToProps, mapDispatchToProps)(BannerComponent);

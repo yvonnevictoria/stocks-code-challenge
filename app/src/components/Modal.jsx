@@ -36,15 +36,18 @@ const Modal = ({
                 </div>
 
                 <div className="remaining-amount">
-                    <span className="remaining-amount-message">Remaining {amountLabel}</span>
-                    <span>{amountRemaining}</span>
+                    <span className="remaining-amount-message">{amountLabel}</span>
+                    <span>{amountRemaining || 0}</span>
+                    { amountRemaining < 0 &&
+                        <span className="error-message">Insufficient Balance</span>
+                    }
                 </div>
 
                 <div className="modal-buttons">
                     <button className="secondary cancel-button" onClick={handleClose}>
                         Cancel
                     </button>
-                    <button className="primary" onClick={handleConfirm}>
+                    <button className="primary" onClick={handleConfirm} disabled={amountRemaining < 0}>
                         {confirmText}
                     </button>
                 </div>

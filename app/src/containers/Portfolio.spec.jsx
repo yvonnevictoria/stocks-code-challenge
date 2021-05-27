@@ -30,14 +30,4 @@ describe('Portfolio container', () => {
     it(`should set props.portfolio to state.portfolio`, () => {
         expect(wrapper.dive().prop('portfolio')).toStrictEqual({ test: 'test' });
     });
-
-    it('should set prop.getPortfolio to dispatch a portfolioRetrieveRequested action', () => {
-        wrapper.prop('getPortfolio')();
-
-        const actions = store.getActions();
-
-        expect(actions).toEqual([{
-            type: 'PORTFOLIO_RETRIEVE_REQUESTED',
-        }]);
-    });
 });

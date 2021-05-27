@@ -7,7 +7,7 @@ const httpMock = new MockAdapter(axios);
 const defaultState = {
     isLoading: false,
     isError: false,
-    balance: ''
+    balance: null
 };
 
 describe('balance reducer', () => {
@@ -15,7 +15,7 @@ describe('balance reducer', () => {
         expect(reducer(undefined, {})).toStrictEqual({
             isLoading: false,
             isError: false,
-            balance: ''
+            balance: null
         });
     });
 
@@ -28,7 +28,7 @@ describe('balance reducer', () => {
             expect(reducer(defaultState, action)).toStrictEqual({
                 isLoading: true,
                 isError: false,
-                balance: ''
+                balance: null
             });
         });
     });
@@ -105,16 +105,16 @@ describe('retrieveBalance saga', () => {
     });
 
     it('should call the node balance endpoint', async () => {
-        httpMock.onPost('http://localhost:4000/balance').reply(200);
+        httpMock.onGet('http://localhost:4000/balance').reply(200);
         return expectSaga(retrieveBalance)
-            .call(axios.get('http://localhost:4000/'))
+            .call(axios.get, 'http://localhost:4000/balance')
             .run();
     });
 
     it('should put BALANCE_RETRIEVE_SUCCEEDED action', async () => {
-        httpMock.onPost('http://localhost:4000/balance').reply(200);
+        httpMock.onGet('http://localhost:4000/balance').reply(200, 7432);
 
-        await expectSaga(retrieveBalance, {})
+        await expectSaga(retrieveBalance)
             .put({ type: 'BALANCE_RETRIEVE_SUCCEEDED', balance: 7432 })
             .run();
     });
@@ -136,9 +136,7 @@ describe('watchRetrieveBalanceRequest saga', () => {
         expect(
             testSaga(watchRetrieveBalanceRequest)
                 .next()
-                .take('BALANCE_RETRIEVE_REQUESTED')
-                .next('')
-                .fork(retrieveBalance, '')
+                .takeLatest('BALANCE_RETRIEVE_REQUESTED', retrieveBalance)
                 .finish()
                 .isDone()
         ).toBeTruthy();
