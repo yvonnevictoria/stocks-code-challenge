@@ -23,12 +23,6 @@ const Portfolio = ({ portfolio, getPortfolio, isLoading, isError, sellStock, pur
         setSellStockModalOpen(true);
     };
 
-    const buyStock = ({ symbol, amount }) => {
-        setStockCompany(symbol);
-        setExistingStocks(amount);
-        setSellStockModalOpen(true);
-    };
-
     if (isLoading) {
         return <p>Loading</p>;
     }
