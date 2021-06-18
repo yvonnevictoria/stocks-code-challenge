@@ -67,12 +67,8 @@ While making these trade offs, I had the following priorities in mind
     - having to rewrite object values which I really try to avoid
     - not being scalable (can't add new properties to the obj because you can only have a key and a value). This meant I couldn't implement a few features that I wanted to e.g. pulling the stock price for the associated company.
 
--  I also assumed having basic error handling would save me time (not using Boom, Joi). By the end of it I realised how much time these save during the debugging process.
+-  I also assumed not using Boom and Joi in my error handling would save me time. By the end of it I realised how much time these save during the debugging process, and are definitely worthwhile having in the app.
 
 NOTE: The reason I did not retrospectively add the above items into the code base is because the problems appeared so late in the process that I would have to spend as much time refactoring and re-architecting as I had already spent coding.
-
--  The API endpoint would indicate errors by returning a 200 OK status with error messages in the result. Had already implemented it in the app and it broke everything anytime I tried to handle the error as it returned a string instead of the expected JSON obj. Ended up changing the endpoint to one that returned an empty object instead.
-
--  I was unable to push this repo to heroku as it uses the git repo to create an instance. As I have both my `app` and `server` in the same repo it was unable to deploy the project. I haven’t deployed an app into heroku before. After spending 40 minutes tinkering and searching through the documentation in order to get the frontend code working alongside the backend API, I decided to leave it given the time constraints.
 
 -  Overall, the process was quite smooth because I spent time understanding what basic functions the front end would have, and the information that they would require from the node endpoints. This meant that I did not have to make big changes to the endpoints or their return values once they were written.
