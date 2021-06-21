@@ -1,5 +1,10 @@
 # Stocks Code Challenge
 
+![alt text](./assets/portfolio-screenshot.png "Screenshot of app landing page")
+
+
+![alt text](./assets/modal-screenshot.png "Screenshot of app modal example")
+
 ## Prerequisites
 - Must run on React 16 or tests will break.
 - Must run on Node v12 or higher.
@@ -72,8 +77,3 @@ While making these trade offs, I had the following priorities in mind
 NOTE: The reason I did not retrospectively add the above items into the code base is because the problems appeared so late in the process that I would have to spend as much time refactoring and re-architecting as I had already spent coding.
 
 -  Overall, the process was quite smooth because I spent time understanding what basic functions the front end would have, and the information that they would require from the node endpoints. This meant that I did not have to make big changes to the endpoints or their return values once they were written.
-
-![alt text](./assets/portfolio-screenshot.png "Screenshot of app landing page")
-
-
-![alt text](./assets/modal-screenshot.png "Screenshot of app modal example")
