@@ -12,12 +12,10 @@ describe('Dashboard', () => {
     });
 
     it(`should display Banner`, () => {
-        wrapper = shallow(<Dashboard />);
         expect(wrapper.find(Banner).length).toBe(1);
     });
 
     it(`should display Portfolio`, () => {
-        wrapper = shallow(<Dashboard />);
         expect(wrapper.find(Portfolio).length).toBe(1);
     });
 });

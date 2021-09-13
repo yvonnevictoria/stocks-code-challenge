@@ -36,8 +36,8 @@ describe('Portfolio', () => {
 
     describe(`portfolio`, () => {
         it(`should call props.getPortfolio if portfolio is empty`, () => {
-            const wrapper = mount(<Portfolio {...requiredProps} />); // Mounted to get useEffect working
-            wrapper.setProps({
+            const mountedWrapper = mount(<Portfolio {...requiredProps} />); // Mounted to get useEffect working
+            mountedWrapper.setProps({
                 portfolio: {}
             }); // Force a re-render
             expect(requiredProps.getPortfolio).toHaveBeenCalledTimes(1);

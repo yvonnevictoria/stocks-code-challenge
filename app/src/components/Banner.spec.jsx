@@ -28,8 +28,8 @@ describe('Banner', () => {
                 isError: false,
                 getBalance: jest.fn()
             };
-            const wrapper = mount(<Banner {...props} />); // Mounted to get useEffect working
-            wrapper.setProps({
+            const mountedWrapper = mount(<Banner {...props} />); // Mounted to get useEffect working
+            mountedWrapper.setProps({
                 balance: 0
             }); // Force a re-render
             expect(props.getBalance).toHaveBeenCalledTimes(1);
