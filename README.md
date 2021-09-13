@@ -1,5 +1,7 @@
 # Stocks Code Challenge
 
+Attempting to solve a vague and complex problem statement in a 10 hour time block. I wanted to see what I could create in a short period of time.
+
 ![alt text](./assets/portfolio-screenshot.png "Screenshot of app landing page")
 
 
